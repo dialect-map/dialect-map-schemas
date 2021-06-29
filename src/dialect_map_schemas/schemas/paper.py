@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from marshmallow import fields
+from marshmallow import validates
 
 from .base import BaseStaticSchema
 from .base import BaseEvolvingSchema
@@ -43,3 +44,21 @@ class PaperReferenceCounters(BaseStaticSchema):
     arxiv_ref_count = fields.Integer(required=True)
     total_ref_count = fields.Integer(required=True)
     created_at = fields.DateTime(required=True)
+
+    @validates("arxiv_ref_count")
+    def validate_arxiv_ref_count(self, count: int):
+        """
+        Validates paper ArXiv internal references
+        :param count: paper ArXiv internal references
+        """
+
+        assert count >= 0, f"Invalid references count: {count}"
+
+    @validates("total_ref_count")
+    def validate_total_ref_count(self, count: int):
+        """
+        Validates paper total references
+        :param count: paper total references
+        """
+
+        assert count >= 0, f"Invalid references count: {count}"
