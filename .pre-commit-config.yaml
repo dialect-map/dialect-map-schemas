@@ -17,8 +17,3 @@ repos:
         args: ["src"]
         language: python
         pass_filenames: false
-    -   id: mypy
-        name: "Python types analyzer (tests)"
-        args: ["tests"]
-        language: python
-        pass_filenames: false
