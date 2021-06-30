@@ -33,6 +33,15 @@ class Jargon(BaseArchivalSchema):
 
         assert re.match(JARGON_ID_REGEX, id), f"Invalid ID: {id}"
 
+    @validates("group_id")
+    def validate_group_id(self, id: str):
+        """
+        Validates the jargon group ID format
+        :param id: jargon group ID
+        """
+
+        assert re.match(GROUP_ID_REGEX, id), f"Invalid ID: {id}"
+
 
 class JargonGroup(BaseArchivalSchema):
     """Jargon group to relate jargons with similar meaning"""
