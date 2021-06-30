@@ -3,9 +3,12 @@
 from datetime import datetime
 
 from marshmallow import EXCLUDE
+from marshmallow import pre_load
 from marshmallow import Schema
 from marshmallow import ValidationError
 from marshmallow import validates_schema
+
+from .__utils import get_from_keys
 
 
 class BaseSchema(Schema):
@@ -21,9 +24,34 @@ class BaseSchema(Schema):
 
         unknown = EXCLUDE
 
+    @pre_load
+    def map_alternative_keys(self, data: dict, **_):
+        """
+        Maps alternative key values to schema fields.
+        :param data: dictionary with schema fields
+        :param _: rest of object creation arguments
+        """
+
+        ### NOTE:
+        ###
+        ### This function takes advantage of the multi-purpose 'metadata'
+        ### field argument in order to define deserializing alternative keys
+        ###
+        ### This is a cleaner approach than defining one 'pre_load' function
+        ### for each field that defines any deserializing alternative keys
+        ###
+        for name, field in self.fields.items():
+            if field.metadata:
+                keys = [name] + field.metadata["alt"]
+                data[name] = get_from_keys(data, keys)
+
+        return data
+
 
 class BaseStaticSchema(BaseSchema):
     """Base class defining validations for the static models"""
+
+    pass
 
 
 class BaseArchivalSchema(BaseSchema):
