@@ -14,8 +14,8 @@ CATEGORY_ID_REGEX = re.compile("^\\w+(-\\w+)?(\\.\\w+)?(-\\w+)?$")
 class Category(BaseArchivalSchema):
     """ArXiv category information record"""
 
-    category_id = fields.String(required=True)
-    description = fields.String(required=True)
+    category_id = fields.String(required=True, metadata={"alt": ["id"]})
+    description = fields.String(required=True, metadata={"alt": ["name"]})
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True)
     archived_at = fields.DateTime(required=False)
