@@ -15,9 +15,9 @@ GROUP_ID_REGEX = re.compile("^group-\\d+$")
 class Jargon(BaseArchivalSchema):
     """Jargon term related information record"""
 
-    jargon_id = fields.String(required=True)
-    jargon_term = fields.String(required=True)
-    jargon_regex = fields.String(required=True)
+    jargon_id = fields.String(required=True, metadata={"alt": ["id"]})
+    jargon_term = fields.String(required=True, metadata={"alt": ["name"]})
+    jargon_regex = fields.String(required=True, metadata={"alt": ["regex"]})
     group_id = fields.String(required=False)
     num_words = fields.Integer(required=False)
     archived = fields.Boolean(required=True)
@@ -46,7 +46,7 @@ class Jargon(BaseArchivalSchema):
 class JargonGroup(BaseArchivalSchema):
     """Jargon group to relate jargons with similar meaning"""
 
-    group_id = fields.String(required=True)
+    group_id = fields.String(required=True, metadata={"alt": ["id"]})
     description = fields.String(required=True)
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True)
