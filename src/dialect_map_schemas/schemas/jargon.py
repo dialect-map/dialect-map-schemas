@@ -21,7 +21,7 @@ class Jargon(BaseArchivalSchema):
     jargon_term = fields.String(required=True)
     jargon_regex = fields.String(required=True)
     archived = fields.Boolean(required=True)
-    created_at = fields.DateTime(required=True)
+    created_at = fields.DateTime(required=True, metadata={"CTX_GET": "group_dt"})
     archived_at = fields.DateTime(required=False)
 
     @property
@@ -67,7 +67,7 @@ class JargonGroup(BaseArchivalSchema):
     group_id = fields.String(required=True, metadata={"ALT": "id"})
     description = fields.String(required=True)
     archived = fields.Boolean(required=True)
-    created_at = fields.DateTime(required=True)
+    created_at = fields.DateTime(required=True, metadata={"CTX_SET": "group_dt"})
     archived_at = fields.DateTime(required=False)
 
     # List of nested schemas
