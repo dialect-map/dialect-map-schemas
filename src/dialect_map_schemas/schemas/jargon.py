@@ -64,7 +64,7 @@ class Jargon(BaseArchivalSchema):
 class JargonGroup(BaseArchivalSchema):
     """Jargon group to relate jargons with similar meaning"""
 
-    group_id = fields.String(required=True, metadata={"alt": ["id"]})
+    group_id = fields.String(required=True, metadata={"ALT": "id"})
     description = fields.String(required=True)
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True)
