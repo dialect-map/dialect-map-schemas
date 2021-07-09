@@ -16,6 +16,15 @@ class JargonCategoryMetrics(BaseStaticSchema):
     rel_freq = fields.Float(required=True)
     created_at = fields.DateTime(required=True)
 
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.metric_id.name)
+
     @validates("abs_freq")
     def validate_abs_freq(self, freq: int):
         """
@@ -46,6 +55,15 @@ class JargonPaperMetrics(BaseStaticSchema):
     abs_freq = fields.Integer(required=True)
     rel_freq = fields.Float(required=True)
     created_at = fields.DateTime(required=True)
+
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.metric_id.name)
 
     @validates("abs_freq")
     def validate_abs_freq(self, freq: int):

@@ -24,6 +24,15 @@ class Paper(BaseEvolvingSchema):
     created_at = fields.DateTime(required=True)
     updated_at = fields.DateTime(required=True)
 
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.arxiv_id.name)
+
 
 class PaperAuthor(BaseStaticSchema):
     """ArXiv paper author record"""
@@ -33,6 +42,15 @@ class PaperAuthor(BaseStaticSchema):
     arxiv_rev = fields.Integer(required=True)
     author_name = fields.String(required=True)
     created_at = fields.DateTime(required=True)
+
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.author_id.name)
 
 
 class PaperReferenceCounters(BaseStaticSchema):
@@ -44,6 +62,15 @@ class PaperReferenceCounters(BaseStaticSchema):
     arxiv_ref_count = fields.Integer(required=True)
     total_ref_count = fields.Integer(required=True)
     created_at = fields.DateTime(required=True)
+
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.count_id.name)
 
     @validates("arxiv_ref_count")
     def validate_arxiv_ref_count(self, count: int):

@@ -24,6 +24,15 @@ class Jargon(BaseArchivalSchema):
     created_at = fields.DateTime(required=True)
     archived_at = fields.DateTime(required=False)
 
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.jargon_id.name)
+
     @validates("group_id")
     def validate_group_id(self, id: str):
         """
@@ -67,6 +76,15 @@ class JargonGroup(BaseArchivalSchema):
         nested=Jargon,
         many=True,
     )
+
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.group_id.name)
 
     @validates("group_id")
     def validate_group_id(self, id: str):

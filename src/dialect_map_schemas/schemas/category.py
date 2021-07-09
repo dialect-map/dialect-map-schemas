@@ -20,6 +20,15 @@ class Category(BaseArchivalSchema):
     created_at = fields.DateTime(required=True)
     archived_at = fields.DateTime(required=False)
 
+    @property
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        return str(self.category_id.name)
+
     @validates("category_id")
     def validate_category_id(self, id: str):
         """
