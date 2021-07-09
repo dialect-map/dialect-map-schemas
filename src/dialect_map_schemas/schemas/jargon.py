@@ -19,7 +19,6 @@ class Jargon(BaseArchivalSchema):
     jargon_term = fields.String(required=True, metadata={"alt": ["name"]})
     jargon_regex = fields.String(required=True, metadata={"alt": ["regex"]})
     group_id = fields.String(required=False)
-    num_words = fields.Integer(required=False)
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True)
     archived_at = fields.DateTime(required=False)
