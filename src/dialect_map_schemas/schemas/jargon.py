@@ -52,6 +52,13 @@ class JargonGroup(BaseArchivalSchema):
     created_at = fields.DateTime(required=True)
     archived_at = fields.DateTime(required=False)
 
+    # List of nested schemas
+    jargons = fields.Nested(
+        required=True,
+        nested=Jargon,
+        many=True,
+    )
+
     @validates("group_id")
     def validate_group_id(self, id: str):
         """
