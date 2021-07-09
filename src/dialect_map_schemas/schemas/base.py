@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from abc import abstractmethod
 from datetime import datetime
 
 from marshmallow import EXCLUDE
@@ -51,11 +52,29 @@ class BaseSchema(Schema):
 class BaseStaticSchema(BaseSchema):
     """Base class defining validations for the static models"""
 
-    pass
+    @property
+    @abstractmethod
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        raise NotImplementedError()
 
 
 class BaseArchivalSchema(BaseSchema):
     """Base class defining validations for the archival models"""
+
+    @property
+    @abstractmethod
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        raise NotImplementedError()
 
     @validates_schema
     def validate_archival_date(self, data: dict, **_):
@@ -79,6 +98,16 @@ class BaseArchivalSchema(BaseSchema):
 
 class BaseEvolvingSchema(BaseSchema):
     """Base class defining validations for the evolving models"""
+
+    @property
+    @abstractmethod
+    def schema_id(self) -> str:
+        """
+        Gets the ID field name of the schema
+        :return: ID field name
+        """
+
+        raise NotImplementedError()
 
     @validates_schema
     def validate_update_date(self, data: dict, **_):
