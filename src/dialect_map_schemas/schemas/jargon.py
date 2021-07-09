@@ -8,6 +8,7 @@ from marshmallow import validates
 from .base import BaseArchivalSchema
 
 
+JARGON_TERM_REGEX = re.compile("^[a-z \\-]+$")
 JARGON_ID_REGEX = re.compile("^group-\\d+-jargon-\\d+$")
 GROUP_ID_REGEX = re.compile("^group-\\d+$")
 
@@ -40,6 +41,15 @@ class Jargon(BaseArchivalSchema):
         """
 
         assert re.match(JARGON_ID_REGEX, id), f"Invalid ID: {id}"
+
+    @validates("jargon_term")
+    def validate_jargon_term(self, term: str):
+        """
+        Validates the jargon term format
+        :param term: jargon term
+        """
+
+        assert re.match(JARGON_TERM_REGEX, term), f"Invalid term: {term}"
 
 
 class JargonGroup(BaseArchivalSchema):
