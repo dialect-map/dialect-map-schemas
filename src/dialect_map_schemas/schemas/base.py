@@ -8,6 +8,7 @@ from marshmallow import pre_load
 from marshmallow import Schema
 from marshmallow import ValidationError
 from marshmallow import validates_schema
+from marshmallow.fields import Field
 
 from .__utils import get_from_keys
 
@@ -19,11 +20,22 @@ class BaseSchema(Schema):
         """
         Metaclass to define serialization properties
 
+        :attr ordered: how to serialize upon dump.
         :attr unknown: how to handle unknown fields.
-        Ref: https://marshmallow.readthedocs.io/en/stable/quickstart.html#handling-unknown-fields
+        Ref: https://marshmallow.readthedocs.io/en/stable/quickstart.html
         """
 
+        ordered = True
         unknown = EXCLUDE
+
+    def on_bind_field(self, field_name: str, field_obj: Field) -> None:
+        """
+        Overrides default no-op binding to make field object attrs available
+        :param field_name: schema field attribute name
+        :param field_obj: schema field instantiated object
+        """
+
+        setattr(self, field_name, field_obj)
 
     @pre_load
     def map_alternative_keys(self, data: dict, **_):
