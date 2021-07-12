@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .api_route import APIRoute
+from .model import APIRoute
 
 from ..schemas import *
 
