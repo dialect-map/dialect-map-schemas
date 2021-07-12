@@ -157,7 +157,7 @@ class BaseArchivalSchema(BaseSchema):
             and isinstance(archived_date, datetime)
             and created_date > archived_date
         ):
-            raise ValidationError(f"The archival date cannot be prior the creation date")
+            raise ValidationError("The archival date cannot be prior the creation date")
 
 
 class BaseEvolvingSchema(BaseSchema):
