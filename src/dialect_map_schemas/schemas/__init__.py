@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from .base import BaseStaticSchema
+from .base import BaseArchivalSchema
+from .base import BaseEvolvingSchema
+
 from .category import Category
 from .membership import CategoryMembership
 

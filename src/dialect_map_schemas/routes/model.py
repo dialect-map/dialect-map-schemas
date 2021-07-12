@@ -1,8 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from dataclasses import dataclass
-from marshmallow import Schema
 from typing import Type
+from typing import Union
+
+from ..schemas import BaseStaticSchema
+from ..schemas import BaseArchivalSchema
+from ..schemas import BaseEvolvingSchema
+
+
+# Generic base schema type
+Schema = Union[BaseStaticSchema, BaseArchivalSchema, BaseEvolvingSchema]
 
 
 @dataclass
