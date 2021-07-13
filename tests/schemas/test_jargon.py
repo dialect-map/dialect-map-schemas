@@ -1,0 +1,172 @@
+# -*- coding: utf-8 -*-
+
+import pytest
+
+from copy import deepcopy
+from datetime import datetime
+
+from src.dialect_map_schemas import Jargon
+from src.dialect_map_schemas import JargonGroup
+from src.dialect_map_schemas import SchemaError
+
+
+class TestJargonSchema:
+    """Class to group all the Jargon schema tests"""
+
+    @pytest.fixture(scope="class")
+    def test_data(self) -> dict:
+        """
+        Builds a dictionary with test Jargon values
+        :return: dictionary with test Jargon values
+        """
+
+        return {
+            "group_id": "group-0",
+            "jargon_id": "group-0-jargon-0",
+            "jargon_term": "jargon-term",
+            "jargon_regex": "jargon[ -]term",
+            "archived": True,
+            "created_at": datetime.utcnow().isoformat(),
+        }
+
+    def test_load_from_context(self, test_data: dict):
+        """
+        Tests the correct extraction of values from the context
+        :param test_data: test Jargon values
+        """
+
+        schema = Jargon()
+        dt_now = datetime.utcnow()
+
+        jargon_data = deepcopy(test_data)
+        jargon_data.pop("created_at")
+        schema.context = {"group_dt": dt_now.isoformat()}
+
+        record = schema.load(jargon_data)
+
+        assert isinstance(record, dict)
+        assert record.get("created_at") == dt_now
+
+    def test_load_valid_values(self, test_data: dict):
+        """
+        Tests the correct loading of valid Jargon schema values
+        :param test_data: test Jargon values
+        """
+
+        schema = Jargon()
+
+        jargon_data = deepcopy(test_data)
+        jargon_data["group_id"] = "group-1"
+        jargon_data["jargon_id"] = "group-1-jargon-0"
+        jargon_data["jargon_term"] = "term"
+
+        record = schema.load(jargon_data)
+
+        assert isinstance(record, dict)
+        assert record.get("group_id") == "group-1"
+        assert record.get("jargon_id") == "group-1-jargon-0"
+        assert record.get("jargon_term") == "term"
+
+    def test_load_invalid_group_id(self, test_data: dict):
+        """
+        Tests the correct validation of invalid group ID values
+        :param test_data: test Jargon values
+        """
+
+        schema = Jargon()
+
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "001"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group-no"})
+
+    def test_load_invalid_jargon_id(self, test_data: dict):
+        """
+        Tests the correct validation of invalid jargon ID values
+        :param test_data: test Jargon values
+        """
+
+        schema = Jargon()
+
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "001"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "group"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "group-no"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "group-0"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "group-0-jargon"})
+
+    def test_load_invalid_jargon_term(self, test_data: dict):
+        """
+        Tests the correct validation of invalid jargon term values
+        :param test_data: test Jargon values
+        """
+
+        schema = Jargon()
+
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "001"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "term "})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "term-"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": " term"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "-term"})
+
+
+class TestJargonGroupSchema:
+    """Class to group all the JargonGroup schema tests"""
+
+    @pytest.fixture(scope="class")
+    def test_data(self) -> dict:
+        """
+        Builds a dictionary with test JargonGroup values
+        :return: dictionary with test JargonGroup values
+        """
+
+        return {
+            "group_id": "group-0",
+            "description": "example text",
+            "archived": True,
+            "jargons": [],
+            "created_at": datetime.utcnow().isoformat(),
+        }
+
+    def test_load_alternative_keys(self, test_data: dict):
+        """
+        Tests the correct extraction of alternative key values
+        :param test_data: test JargonGroup values
+        """
+
+        schema = JargonGroup()
+
+        group_data = deepcopy(test_data)
+        group_data.pop("group_id")
+        group_data["id"] = "group-1"
+
+        record = schema.load(group_data)
+
+        assert isinstance(record, dict)
+        assert record.get("group_id") == "group-1"
+
+    def test_load_into_context(self, test_data: dict):
+        """
+        Tests the correct extraction of values from the context
+        :param test_data: test JargonGroup values
+        """
+
+        schema = JargonGroup()
+        dt_now = datetime.utcnow()
+
+        group_data = deepcopy(test_data)
+        group_data["created_at"] = dt_now.isoformat()
+
+        _ = schema.load(group_data)
+
+        assert schema.context.get("group_dt") == dt_now.isoformat()
+
+    def test_load_invalid_group_id(self, test_data: dict):
+        """
+        Tests the correct validation of invalid group ID values
+        :param test_data: test JargonGroup values
+        """
+
+        schema = JargonGroup()
+
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "001"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group"})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group-no"})
