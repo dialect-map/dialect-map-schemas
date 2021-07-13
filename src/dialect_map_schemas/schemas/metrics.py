@@ -12,7 +12,7 @@ class JargonCategoryMetrics(BaseStaticSchema):
     metric_id = fields.String(required=False)
     jargon_id = fields.String(required=True)
     category_id = fields.String(required=True)
-    abs_freq = fields.Integer(required=True)
+    abs_freq = fields.Integer(required=True, strict=True)
     rel_freq = fields.Float(required=True)
     created_at = fields.DateTime(required=True)
 
@@ -51,8 +51,8 @@ class JargonPaperMetrics(BaseStaticSchema):
     metric_id = fields.String(required=False)
     jargon_id = fields.String(required=True)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True)
-    abs_freq = fields.Integer(required=True)
+    arxiv_rev = fields.Integer(required=True, strict=True)
+    abs_freq = fields.Integer(required=True, strict=True)
     rel_freq = fields.Float(required=True)
     created_at = fields.DateTime(required=True)
 

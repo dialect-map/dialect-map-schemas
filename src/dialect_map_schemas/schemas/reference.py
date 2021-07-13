@@ -10,9 +10,9 @@ class PaperReference(BaseStaticSchema):
 
     reference_id = fields.String(required=False)
     source_arxiv_id = fields.String(required=True)
-    source_arxiv_rev = fields.Integer(required=True)
+    source_arxiv_rev = fields.Integer(required=True, strict=True)
     target_arxiv_id = fields.String(required=True)
-    target_arxiv_rev = fields.Integer(required=True)
+    target_arxiv_rev = fields.Integer(required=True, strict=True)
     created_at = fields.DateTime(required=True)
 
     @property

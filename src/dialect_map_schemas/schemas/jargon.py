@@ -8,7 +8,7 @@ from marshmallow import validates
 from .base import BaseArchivalSchema
 
 
-JARGON_TERM_REGEX = re.compile("^[a-z \\-]+$")
+JARGON_TERM_REGEX = re.compile("^[a-z]+([ \\-][a-z]+)*$")
 JARGON_ID_REGEX = re.compile("^group-\\d+-jargon-\\d+$")
 GROUP_ID_REGEX = re.compile("^group-\\d+$")
 
