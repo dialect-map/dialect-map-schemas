@@ -10,7 +10,7 @@ class CategoryMembership(BaseStaticSchema):
 
     membership_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True)
+    arxiv_rev = fields.Integer(required=True, strict=True)
     category_id = fields.String(required=True)
     created_at = fields.DateTime(required=True)
 

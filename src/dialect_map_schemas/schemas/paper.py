@@ -11,7 +11,7 @@ class Paper(BaseEvolvingSchema):
     """ArXiv paper - category membership record"""
 
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True)
+    arxiv_rev = fields.Integer(required=True, strict=True)
     title = fields.String(required=True)
     doi_id = fields.String(required=False)
     url_pdf = fields.URL(required=False)
@@ -39,7 +39,7 @@ class PaperAuthor(BaseStaticSchema):
 
     author_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True)
+    arxiv_rev = fields.Integer(required=True, strict=True)
     author_name = fields.String(required=True)
     created_at = fields.DateTime(required=True)
 
@@ -58,9 +58,9 @@ class PaperReferenceCounters(BaseStaticSchema):
 
     count_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True)
-    arxiv_ref_count = fields.Integer(required=True)
-    total_ref_count = fields.Integer(required=True)
+    arxiv_rev = fields.Integer(required=True, strict=True)
+    arxiv_ref_count = fields.Integer(required=True, strict=True)
+    total_ref_count = fields.Integer(required=True, strict=True)
     created_at = fields.DateTime(required=True)
 
     @property
