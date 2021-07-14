@@ -8,6 +8,13 @@ are use by different software components to either serialize or deserialize cert
 attributes of those models (or the models in their entirety).
 
 
+### Documentation
+For more information about data schemas and their relationship to [the core package][dialect-map-core]
+defined data models:
+
+- [Data schemas][docs-schemas].
+
+
 ### Dependencies
 Python dependencies are specified within the `setup.py` file.
 
@@ -19,7 +26,7 @@ pre-commit install
 
 
 ### Formatting
-All Python files are formatted using [Black][black-web], and the custom properties defined
+All Python files are formatted using [Black][web-black], and the custom properties defined
 in the `pyproject.toml` file.
 ```sh
 make check
@@ -27,7 +34,7 @@ make check
 
 
 ### Testing
-Project testing is performed using [Pytest][pytest-web]. In order to run the tests:
+Project testing is performed using [Pytest][web-pytest]. In order to run the tests:
 ```sh
 make test
 ```
@@ -36,10 +43,12 @@ make test
 ### Tagging
 Commits can be tagged to create _informal_ releases of the package. In order to do so:
 
-1. Bump up the package version (`VERSION`) following [Semantic Versioning][semantic-web].
+1. Bump up the package version (`VERSION`) following [Semantic Versioning][web-semver].
 2. Create and push a tag: `make tag`.
 
 
-[black-web]: https://black.readthedocs.io/en/stable/
-[pytest-web]: https://docs.pytest.org/en/latest/#
-[semantic-web]: https://semver.org/
+[dialect-map-core]: https://github.com/dialect-map/dialect-map-core
+[docs-schemas]: docs/schemas.md
+[web-black]: https://black.readthedocs.io/en/stable/
+[web-pytest]: https://docs.pytest.org/en/latest/#
+[web-semver]: https://semver.org/
