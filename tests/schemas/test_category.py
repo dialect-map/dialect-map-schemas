@@ -5,7 +5,7 @@ import pytest
 from copy import deepcopy
 from datetime import datetime
 
-from src.dialect_map_schemas import Category
+from src.dialect_map_schemas import CategorySchema
 
 
 class TestCategorySchema:
@@ -31,7 +31,7 @@ class TestCategorySchema:
         :param test_data: test Category values
         """
 
-        schema = Category()
+        schema = CategorySchema()
 
         cat_data = deepcopy(test_data)
         cat_data.pop("category_id")

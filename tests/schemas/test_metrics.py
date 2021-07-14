@@ -5,8 +5,8 @@ import pytest
 from copy import deepcopy
 from datetime import datetime
 
-from src.dialect_map_schemas import JargonCategoryMetrics
-from src.dialect_map_schemas import JargonPaperMetrics
+from src.dialect_map_schemas import JargonCategoryMetricsSchema
+from src.dialect_map_schemas import JargonPaperMetricsSchema
 from src.dialect_map_schemas import SchemaError
 
 
@@ -35,7 +35,7 @@ class TestJargonCategoryMetricsSchema:
         :param test_data: test JargonCategoryMetrics values
         """
 
-        schema = JargonCategoryMetrics()
+        schema = JargonCategoryMetricsSchema()
 
         metrics_data = deepcopy(test_data)
         metrics_data["metric_id"] = "metric-id-test"
@@ -53,7 +53,7 @@ class TestJargonCategoryMetricsSchema:
         :param test_data: test JargonCategoryMetrics values
         """
 
-        schema = JargonCategoryMetrics()
+        schema = JargonCategoryMetricsSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "abs_freq": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "abs_freq": +float(1.5)})
@@ -65,7 +65,7 @@ class TestJargonCategoryMetricsSchema:
         :param test_data: test JargonCategoryMetrics values
         """
 
-        schema = JargonCategoryMetrics()
+        schema = JargonCategoryMetricsSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "rel_freq": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "rel_freq": +1.5})
@@ -97,7 +97,7 @@ class TestJargonPaperMetricsSchema:
         :param test_data: test JargonPaperMetrics values
         """
 
-        schema = JargonPaperMetrics()
+        schema = JargonPaperMetricsSchema()
 
         metrics_data = deepcopy(test_data)
         metrics_data["metric_id"] = "metric-id-test"
@@ -115,7 +115,7 @@ class TestJargonPaperMetricsSchema:
         :param test_data: test JargonPaperMetrics values
         """
 
-        schema = JargonPaperMetrics()
+        schema = JargonPaperMetricsSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "abs_freq": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "abs_freq": +float(1.5)})
@@ -127,7 +127,7 @@ class TestJargonPaperMetricsSchema:
         :param test_data: test JargonPaperMetrics values
         """
 
-        schema = JargonPaperMetrics()
+        schema = JargonPaperMetricsSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "rel_freq": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "rel_freq": +1.5})

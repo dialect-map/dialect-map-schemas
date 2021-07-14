@@ -5,8 +5,8 @@ import pytest
 from copy import deepcopy
 from datetime import datetime
 
-from src.dialect_map_schemas import Jargon
-from src.dialect_map_schemas import JargonGroup
+from src.dialect_map_schemas import JargonSchema
+from src.dialect_map_schemas import JargonGroupSchema
 from src.dialect_map_schemas import SchemaError
 
 
@@ -35,7 +35,7 @@ class TestJargonSchema:
         :param test_data: test Jargon values
         """
 
-        schema = Jargon()
+        schema = JargonSchema()
         dt_now = datetime.utcnow()
 
         jargon_data = deepcopy(test_data)
@@ -53,7 +53,7 @@ class TestJargonSchema:
         :param test_data: test Jargon values
         """
 
-        schema = Jargon()
+        schema = JargonSchema()
 
         jargon_data = deepcopy(test_data)
         jargon_data["group_id"] = "group-1"
@@ -73,7 +73,7 @@ class TestJargonSchema:
         :param test_data: test Jargon values
         """
 
-        schema = Jargon()
+        schema = JargonSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "001"})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group"})
@@ -85,7 +85,7 @@ class TestJargonSchema:
         :param test_data: test Jargon values
         """
 
-        schema = Jargon()
+        schema = JargonSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "001"})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_id": "group"})
@@ -99,7 +99,7 @@ class TestJargonSchema:
         :param test_data: test Jargon values
         """
 
-        schema = Jargon()
+        schema = JargonSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "001"})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "jargon_term": "term "})
@@ -132,7 +132,7 @@ class TestJargonGroupSchema:
         :param test_data: test JargonGroup values
         """
 
-        schema = JargonGroup()
+        schema = JargonGroupSchema()
 
         group_data = deepcopy(test_data)
         group_data.pop("group_id")
@@ -149,7 +149,7 @@ class TestJargonGroupSchema:
         :param test_data: test JargonGroup values
         """
 
-        schema = JargonGroup()
+        schema = JargonGroupSchema()
         dt_now = datetime.utcnow()
 
         group_data = deepcopy(test_data)
@@ -165,7 +165,7 @@ class TestJargonGroupSchema:
         :param test_data: test JargonGroup values
         """
 
-        schema = JargonGroup()
+        schema = JargonGroupSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "001"})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "group_id": "group"})

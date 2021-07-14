@@ -6,8 +6,8 @@ from copy import deepcopy
 from datetime import date
 from datetime import datetime
 
-from src.dialect_map_schemas import Paper
-from src.dialect_map_schemas import PaperReferenceCounters
+from src.dialect_map_schemas import PaperSchema
+from src.dialect_map_schemas import PaperReferenceCountersSchema
 from src.dialect_map_schemas import SchemaError
 
 
@@ -36,7 +36,7 @@ class TestPaperSchema:
         :param test_data: test Paper values
         """
 
-        schema = Paper()
+        schema = PaperSchema()
 
         paper_data = deepcopy(test_data)
         paper_data["arxiv_id"] = "paper-id-test"
@@ -80,7 +80,7 @@ class TestPaperReferenceCountersSchema:
         :param test_data: test PaperReferenceCounters values
         """
 
-        schema = PaperReferenceCounters()
+        schema = PaperReferenceCountersSchema()
 
         counter_data = deepcopy(test_data)
         counter_data["count_id"] = "count-id-test"
@@ -96,7 +96,7 @@ class TestPaperReferenceCountersSchema:
         :param test_data: test PaperReferenceCounters values
         """
 
-        schema = PaperReferenceCounters()
+        schema = PaperReferenceCountersSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "arxiv_ref_count": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "arxiv_ref_count": +1.5})
@@ -107,7 +107,7 @@ class TestPaperReferenceCountersSchema:
         :param test_data: test PaperReferenceCounters values
         """
 
-        schema = PaperReferenceCounters()
+        schema = PaperReferenceCountersSchema()
 
         assert pytest.raises(SchemaError, schema.load, {**test_data, "total_ref_count": -1})
         assert pytest.raises(SchemaError, schema.load, {**test_data, "total_ref_count": +1.5})
