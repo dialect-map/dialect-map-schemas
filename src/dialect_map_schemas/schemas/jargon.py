@@ -14,7 +14,7 @@ GROUP_ID_REGEX = re.compile("^group-\\d+$")
 
 
 class Jargon(BaseArchivalSchema):
-    """Jargon term related information record"""
+    """Jargon de/serializing schema"""
 
     group_id = fields.String(required=False)
     jargon_id = fields.String(required=True)
@@ -62,7 +62,7 @@ class Jargon(BaseArchivalSchema):
 
 
 class JargonGroup(BaseArchivalSchema):
-    """Jargon group to relate jargons with similar meaning"""
+    """Jargon group de/serializing schema"""
 
     group_id = fields.String(required=True, metadata={"ALT": "id"})
     description = fields.String(required=True)

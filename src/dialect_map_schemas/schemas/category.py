@@ -6,7 +6,7 @@ from .base import BaseArchivalSchema
 
 
 class Category(BaseArchivalSchema):
-    """ArXiv category information record"""
+    """Category de/serializing schema"""
 
     category_id = fields.String(required=True, metadata={"ALT": "id"})
     description = fields.String(required=True, metadata={"ALT": "name"})

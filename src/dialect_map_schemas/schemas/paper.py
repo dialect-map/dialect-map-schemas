@@ -8,7 +8,7 @@ from .base import BaseEvolvingSchema
 
 
 class Paper(BaseEvolvingSchema):
-    """ArXiv paper - category membership record"""
+    """ArXiv paper de/serializing schema"""
 
     arxiv_id = fields.String(required=True)
     arxiv_rev = fields.Integer(required=True, strict=True)
@@ -35,7 +35,7 @@ class Paper(BaseEvolvingSchema):
 
 
 class PaperAuthor(BaseStaticSchema):
-    """ArXiv paper author record"""
+    """ArXiv paper author de/serializing schema"""
 
     author_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)
@@ -54,7 +54,7 @@ class PaperAuthor(BaseStaticSchema):
 
 
 class PaperReferenceCounters(BaseStaticSchema):
-    """ArXiv paper reference counters record"""
+    """ArXiv paper reference counters de/serializing schema"""
 
     count_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)

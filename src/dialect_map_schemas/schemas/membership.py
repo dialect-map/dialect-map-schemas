@@ -6,7 +6,7 @@ from .base import BaseStaticSchema
 
 
 class CategoryMembership(BaseStaticSchema):
-    """ArXiv paper - category membership record"""
+    """Category membership de/serializing schema"""
 
     membership_id = fields.String(required=False)
     arxiv_id = fields.String(required=True)

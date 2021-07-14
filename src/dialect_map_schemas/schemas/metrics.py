@@ -7,7 +7,7 @@ from .base import BaseStaticSchema
 
 
 class JargonCategoryMetrics(BaseStaticSchema):
-    """ArXiv category jargon NLP metrics"""
+    """Jargon - category NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False)
     jargon_id = fields.String(required=True)
@@ -46,7 +46,7 @@ class JargonCategoryMetrics(BaseStaticSchema):
 
 
 class JargonPaperMetrics(BaseStaticSchema):
-    """ArXiv paper jargon NLP metrics"""
+    """Jargon - paper NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False)
     jargon_id = fields.String(required=True)
