@@ -13,7 +13,7 @@ JARGON_ID_REGEX = re.compile("^group-\\d+-jargon-\\d+$")
 GROUP_ID_REGEX = re.compile("^group-\\d+$")
 
 
-class Jargon(BaseArchivalSchema):
+class JargonSchema(BaseArchivalSchema):
     """Jargon de/serializing schema"""
 
     group_id = fields.String(required=False)
@@ -61,7 +61,7 @@ class Jargon(BaseArchivalSchema):
         assert re.match(JARGON_TERM_REGEX, term), f"Invalid term: {term}"
 
 
-class JargonGroup(BaseArchivalSchema):
+class JargonGroupSchema(BaseArchivalSchema):
     """Jargon group de/serializing schema"""
 
     group_id = fields.String(required=True, metadata={"ALT": "id"})
@@ -73,7 +73,7 @@ class JargonGroup(BaseArchivalSchema):
     # List of nested schemas
     jargons = fields.Nested(
         required=True,
-        nested=Jargon,
+        nested=JargonSchema,
         many=True,
     )
 

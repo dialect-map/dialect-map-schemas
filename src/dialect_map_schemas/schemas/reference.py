@@ -5,7 +5,7 @@ from marshmallow import fields
 from .base import BaseStaticSchema
 
 
-class PaperReference(BaseStaticSchema):
+class PaperReferenceSchema(BaseStaticSchema):
     """ArXiv paper reference de/serializing schema"""
 
     reference_id = fields.String(required=False)

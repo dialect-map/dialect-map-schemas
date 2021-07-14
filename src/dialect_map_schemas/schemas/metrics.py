@@ -6,7 +6,7 @@ from marshmallow import validates
 from .base import BaseStaticSchema
 
 
-class JargonCategoryMetrics(BaseStaticSchema):
+class JargonCategoryMetricsSchema(BaseStaticSchema):
     """Jargon - category NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False)
@@ -45,7 +45,7 @@ class JargonCategoryMetrics(BaseStaticSchema):
         assert freq <= 1, f"Invalid relative frequency: {freq}"
 
 
-class JargonPaperMetrics(BaseStaticSchema):
+class JargonPaperMetricsSchema(BaseStaticSchema):
     """Jargon - paper NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False)

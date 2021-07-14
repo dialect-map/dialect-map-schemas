@@ -5,7 +5,7 @@ from marshmallow import fields
 from .base import BaseStaticSchema
 
 
-class CategoryMembership(BaseStaticSchema):
+class CategoryMembershipSchema(BaseStaticSchema):
     """Category membership de/serializing schema"""
 
     membership_id = fields.String(required=False)

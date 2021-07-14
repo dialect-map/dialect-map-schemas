@@ -4,16 +4,16 @@ from .base import BaseStaticSchema
 from .base import BaseArchivalSchema
 from .base import BaseEvolvingSchema
 
-from .category import Category
-from .membership import CategoryMembership
+from .category import CategorySchema
+from .membership import CategoryMembershipSchema
 
-from .jargon import Jargon
-from .jargon import JargonGroup
+from .jargon import JargonSchema
+from .jargon import JargonGroupSchema
 
-from .metrics import JargonCategoryMetrics
-from .metrics import JargonPaperMetrics
+from .metrics import JargonCategoryMetricsSchema
+from .metrics import JargonPaperMetricsSchema
 
-from .paper import Paper
-from .paper import PaperAuthor
-from .paper import PaperReferenceCounters
-from .reference import PaperReference
+from .paper import PaperSchema
+from .paper import PaperAuthorSchema
+from .paper import PaperReferenceCountersSchema
+from .reference import PaperReferenceSchema

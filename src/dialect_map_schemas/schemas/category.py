@@ -5,7 +5,7 @@ from marshmallow import fields
 from .base import BaseArchivalSchema
 
 
-class Category(BaseArchivalSchema):
+class CategorySchema(BaseArchivalSchema):
     """Category de/serializing schema"""
 
     category_id = fields.String(required=True, metadata={"ALT": "id"})
