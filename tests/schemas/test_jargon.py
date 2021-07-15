@@ -29,24 +29,6 @@ class TestJargonSchema:
             "created_at": datetime.utcnow().isoformat(),
         }
 
-    def test_load_from_context(self, test_data: dict):
-        """
-        Tests the correct extraction of values from the context
-        :param test_data: test Jargon values
-        """
-
-        schema = JargonSchema()
-        dt_now = datetime.utcnow()
-
-        jargon_data = deepcopy(test_data)
-        jargon_data.pop("created_at")
-        schema.context = {"group_dt": dt_now.isoformat()}
-
-        record = schema.load(jargon_data)
-
-        assert isinstance(record, dict)
-        assert record.get("created_at") == dt_now
-
     def test_load_valid_values(self, test_data: dict):
         """
         Tests the correct loading of valid Jargon schema values
@@ -125,39 +107,6 @@ class TestJargonGroupSchema:
             "jargons": [],
             "created_at": datetime.utcnow().isoformat(),
         }
-
-    def test_load_alternative_keys(self, test_data: dict):
-        """
-        Tests the correct extraction of alternative key values
-        :param test_data: test JargonGroup values
-        """
-
-        schema = JargonGroupSchema()
-
-        group_data = deepcopy(test_data)
-        group_data.pop("group_id")
-        group_data["id"] = "group-1"
-
-        record = schema.load(group_data)
-
-        assert isinstance(record, dict)
-        assert record.get("group_id") == "group-1"
-
-    def test_load_into_context(self, test_data: dict):
-        """
-        Tests the correct extraction of values from the context
-        :param test_data: test JargonGroup values
-        """
-
-        schema = JargonGroupSchema()
-        dt_now = datetime.utcnow()
-
-        group_data = deepcopy(test_data)
-        group_data["created_at"] = dt_now.isoformat()
-
-        _ = schema.load(group_data)
-
-        assert schema.context.get("group_dt") == dt_now.isoformat()
 
     def test_load_invalid_group_id(self, test_data: dict):
         """
