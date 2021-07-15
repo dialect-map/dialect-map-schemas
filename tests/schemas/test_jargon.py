@@ -108,6 +108,40 @@ class TestJargonGroupSchema:
             "created_at": datetime.utcnow().isoformat(),
         }
 
+    def test_load_nested_schemas(self, test_data: dict):
+        """
+        Tests the correct loading of nested schemas
+        :param test_data: test JargonGroup values
+        """
+
+        schema = JargonGroupSchema()
+        dt_now = datetime.utcnow()
+
+        group_data = deepcopy(test_data)
+        group_data["created_at"] = dt_now.isoformat()
+        group_data["jargons"] = [
+            {
+                "group_id": "group-1",
+                "jargon_id": "group-1-jargon-1",
+                "jargon_term": "jargon-term",
+                "jargon_regex": "jargon[ -]term",
+                "archived": False,
+            },
+            {
+                "group_id": "group-1",
+                "jargon_id": "group-2-jargon-2",
+                "jargon_term": "jargon-term",
+                "jargon_regex": "jargon[ -]term",
+                "archived": False,
+            },
+        ]
+
+        record = schema.load(group_data)
+        jargons = record["jargons"]
+
+        assert jargons[0].get("created_at") == dt_now
+        assert jargons[1].get("created_at") == dt_now
+
     def test_load_invalid_group_id(self, test_data: dict):
         """
         Tests the correct validation of invalid group ID values
