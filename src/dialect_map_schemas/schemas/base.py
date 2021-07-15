@@ -9,6 +9,7 @@ from marshmallow import Schema
 from marshmallow import ValidationError
 from marshmallow import validates_schema
 from marshmallow.fields import Field
+from marshmallow.utils import missing
 
 
 class BaseSchema(Schema):
@@ -73,9 +74,9 @@ class BaseSchema(Schema):
                 continue
 
             key = field.metadata.get("ALT")
-            val = data.get(key)
+            val = data.get(key, missing)
 
-            if val is not None:
+            if val is not missing:
                 data[name] = val
 
         return data
@@ -92,9 +93,9 @@ class BaseSchema(Schema):
                 continue
 
             key = field.metadata.get("CTX_GET")
-            val = self.context.get(key)
+            val = self.context.get(key, missing)
 
-            if val is not None:
+            if val is not missing:
                 data[name] = val
 
         return data
@@ -107,9 +108,9 @@ class BaseSchema(Schema):
 
         for name, field in self.fields.items():
             key = field.metadata.get("CTX_SET")
-            val = data.get(name)
+            val = data.get(name, missing)
 
-            if key is not None and val is not None:
+            if key is not None and val is not missing:
                 self.context[key] = val
 
 
