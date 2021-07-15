@@ -56,11 +56,13 @@ class BaseSchema(Schema):
         ### This is a cleaner approach than defining one 'pre_load' function
         ### for each field that defines any deserializing custom behaviour
         ###
-        data = self._get_alt_values(data)
-        data = self._get_ctx_values(data)
+        copy = data.copy()
 
-        self._set_ctx_values(data)
-        return data
+        copy = self._get_alt_values(copy)
+        copy = self._get_ctx_values(copy)
+
+        self._set_ctx_values(copy)
+        return copy
 
     def _get_alt_values(self, data: dict) -> dict:
         """
