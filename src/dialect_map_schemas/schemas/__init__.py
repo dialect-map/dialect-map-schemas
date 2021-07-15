@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from .base import BaseSchema
 from .base import BaseStaticSchema
 from .base import BaseArchivalSchema
 from .base import BaseEvolvingSchema

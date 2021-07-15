@@ -9,6 +9,7 @@ from marshmallow import Schema
 from marshmallow import ValidationError
 from marshmallow import validates_schema
 from marshmallow.fields import Field
+from marshmallow.utils import missing
 
 
 class BaseSchema(Schema):
@@ -55,11 +56,13 @@ class BaseSchema(Schema):
         ### This is a cleaner approach than defining one 'pre_load' function
         ### for each field that defines any deserializing custom behaviour
         ###
-        data = self._get_alt_values(data)
-        data = self._get_ctx_values(data)
+        copy = data.copy()
 
-        self._set_ctx_values(data)
-        return data
+        copy = self._get_alt_values(copy)
+        copy = self._get_ctx_values(copy)
+
+        self._set_ctx_values(copy)
+        return copy
 
     def _get_alt_values(self, data: dict) -> dict:
         """
@@ -73,9 +76,9 @@ class BaseSchema(Schema):
                 continue
 
             key = field.metadata.get("ALT")
-            val = data.get(key)
+            val = data.get(key, missing)
 
-            if val is not None:
+            if val is not missing:
                 data[name] = val
 
         return data
@@ -92,9 +95,9 @@ class BaseSchema(Schema):
                 continue
 
             key = field.metadata.get("CTX_GET")
-            val = self.context.get(key)
+            val = self.context.get(key, missing)
 
-            if val is not None:
+            if val is not missing:
                 data[name] = val
 
         return data
@@ -107,9 +110,9 @@ class BaseSchema(Schema):
 
         for name, field in self.fields.items():
             key = field.metadata.get("CTX_SET")
-            val = data.get(name)
+            val = data.get(name, missing)
 
-            if key is not None and val is not None:
+            if key is not None and val is not missing:
                 self.context[key] = val
 
 
