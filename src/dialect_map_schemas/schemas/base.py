@@ -126,6 +126,15 @@ class BaseStaticSchema(BaseSchema):
 
         raise NotImplementedError()
 
+    @property
+    def name(self) -> str:
+        """
+        Gets the schema name
+        :return: schema name
+        """
+
+        return self.__class__.__name__
+
 
 class BaseArchivalSchema(BaseSchema):
     """Base class defining validations for the archival models"""
@@ -139,6 +148,15 @@ class BaseArchivalSchema(BaseSchema):
         """
 
         raise NotImplementedError()
+
+    @property
+    def name(self) -> str:
+        """
+        Gets the schema name
+        :return: schema name
+        """
+
+        return self.__class__.__name__
 
     @validates_schema
     def validate_archival_date(self, data: dict, **_):
@@ -172,6 +190,15 @@ class BaseEvolvingSchema(BaseSchema):
         """
 
         raise NotImplementedError()
+
+    @property
+    def name(self) -> str:
+        """
+        Gets the schema name
+        :return: schema name
+        """
+
+        return self.__class__.__name__
 
     @validates_schema
     def validate_update_date(self, data: dict, **_):
