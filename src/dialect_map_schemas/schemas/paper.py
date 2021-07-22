@@ -37,7 +37,7 @@ class PaperSchema(BaseEvolvingSchema):
 class PaperAuthorSchema(BaseStaticSchema):
     """ArXiv paper author de/serializing schema"""
 
-    author_id = fields.String(required=False)
+    author_id = fields.String(required=False, dump_only=True)
     arxiv_id = fields.String(required=True)
     arxiv_rev = fields.Integer(required=True, strict=True)
     author_name = fields.String(required=True)
@@ -56,7 +56,7 @@ class PaperAuthorSchema(BaseStaticSchema):
 class PaperReferenceCountersSchema(BaseStaticSchema):
     """ArXiv paper reference counters de/serializing schema"""
 
-    count_id = fields.String(required=False)
+    count_id = fields.String(required=False, dump_only=True)
     arxiv_id = fields.String(required=True)
     arxiv_rev = fields.Integer(required=True, strict=True)
     arxiv_ref_count = fields.Integer(required=True, strict=True)
