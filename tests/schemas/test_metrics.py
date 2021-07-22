@@ -21,7 +21,6 @@ class TestJargonCategoryMetricsSchema:
         """
 
         return {
-            "metric_id": "metric-id",
             "jargon_id": "jargon-id",
             "category_id": "category-id",
             "abs_freq": 5,
@@ -37,15 +36,10 @@ class TestJargonCategoryMetricsSchema:
 
         schema = JargonCategoryMetricsSchema()
 
-        metrics_data = deepcopy(test_data)
-        metrics_data["metric_id"] = "metric-id-test"
-        metrics_data["jargon_id"] = "jargon-id-test"
-
-        record = schema.load(metrics_data)
+        data = deepcopy(test_data)
+        record = schema.load(data)
 
         assert isinstance(record, dict)
-        assert record.get("metric_id") == "metric-id-test"
-        assert record.get("jargon_id") == "jargon-id-test"
 
     def test_load_invalid_abs_freq(self, test_data: dict):
         """
@@ -82,7 +76,6 @@ class TestJargonPaperMetricsSchema:
         """
 
         return {
-            "metric_id": "metric-id",
             "jargon_id": "jargon-id",
             "arxiv_id": "paper-id",
             "arxiv_rev": 1,
@@ -99,15 +92,10 @@ class TestJargonPaperMetricsSchema:
 
         schema = JargonPaperMetricsSchema()
 
-        metrics_data = deepcopy(test_data)
-        metrics_data["metric_id"] = "metric-id-test"
-        metrics_data["jargon_id"] = "jargon-id-test"
-
-        record = schema.load(metrics_data)
+        data = deepcopy(test_data)
+        record = schema.load(data)
 
         assert isinstance(record, dict)
-        assert record.get("metric_id") == "metric-id-test"
-        assert record.get("jargon_id") == "jargon-id-test"
 
     def test_load_invalid_abs_freq(self, test_data: dict):
         """

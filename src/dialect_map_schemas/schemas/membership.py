@@ -8,7 +8,7 @@ from .base import BaseStaticSchema
 class CategoryMembershipSchema(BaseStaticSchema):
     """Category membership de/serializing schema"""
 
-    membership_id = fields.String(required=False)
+    membership_id = fields.String(required=False, dump_only=True)
     arxiv_id = fields.String(required=True)
     arxiv_rev = fields.Integer(required=True, strict=True)
     category_id = fields.String(required=True)

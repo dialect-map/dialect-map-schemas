@@ -8,7 +8,7 @@ from .base import BaseStaticSchema
 class PaperReferenceSchema(BaseStaticSchema):
     """ArXiv paper reference de/serializing schema"""
 
-    reference_id = fields.String(required=False)
+    reference_id = fields.String(required=False, dump_only=True)
     source_arxiv_id = fields.String(required=True)
     source_arxiv_rev = fields.Integer(required=True, strict=True)
     target_arxiv_id = fields.String(required=True)
