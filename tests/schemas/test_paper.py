@@ -66,7 +66,6 @@ class TestPaperReferenceCountersSchema:
         """
 
         return {
-            "count_id": "count-id",
             "arxiv_id": "arxiv-id",
             "arxiv_rev": 1,
             "arxiv_ref_count": 10,
@@ -82,13 +81,10 @@ class TestPaperReferenceCountersSchema:
 
         schema = PaperReferenceCountersSchema()
 
-        counter_data = deepcopy(test_data)
-        counter_data["count_id"] = "count-id-test"
-
-        record = schema.load(counter_data)
+        data = deepcopy(test_data)
+        record = schema.load(data)
 
         assert isinstance(record, dict)
-        assert record.get("count_id") == "count-id-test"
 
     def test_load_invalid_arxiv_refs(self, test_data: dict):
         """
