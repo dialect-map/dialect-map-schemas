@@ -15,7 +15,7 @@ VERSION = open("VERSION", "r").read().strip()
 
 # Installation requirements
 INSTALLATION_REQS = [
-    "marshmallow==3.12.2",
+    "marshmallow==3.13.0",
 ]
 
 # Development requirements
