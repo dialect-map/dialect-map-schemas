@@ -20,7 +20,8 @@ Python dependencies are specified within the `setup.py` file.
 
 In order to install the development packages, as long as the defined commit hooks:
 ```sh
-pip install ".[dev]"
+pip install ".[all]"
+pip install pre-commit
 pre-commit install
 ```
 
