@@ -1,5 +1,11 @@
 # Dialect map schemas
 
+[![CI/CD Status][ci-status-badge]][ci-status-link]
+[![Coverage Status][cov-status-badge]][cov-status-link]
+[![MIT license][mit-license-badge]][mit-license-link]
+[![Code style][code-style-badge]][code-style-link]
+
+
 ### About
 This repository contains the data schemas shared across the different components.
 
@@ -47,6 +53,15 @@ Commits can be tagged to create _informal_ releases of the package. In order to 
 1. Bump up the package version (`VERSION`) following [Semantic Versioning][web-semver].
 2. Create and push a tag: `make tag`.
 
+
+[ci-status-badge]: https://github.com/dialect-map/dialect-map-schemas/actions/workflows/ci.yml/badge.svg?branch=main
+[ci-status-link]: https://github.com/dialect-map/dialect-map-schemas/actions/workflows/ci.yml?query=branch%3Amain
+[code-style-badge]: https://img.shields.io/badge/code%20style-black-000000.svg
+[code-style-link]: https://github.com/psf/black
+[cov-status-badge]: https://codecov.io/gh/dialect-map/dialect-map-schemas/branch/main/graph/badge.svg
+[cov-status-link]: https://codecov.io/gh/dialect-map/dialect-map-schemas
+[mit-license-badge]: https://img.shields.io/badge/License-MIT-blue.svg
+[mit-license-link]: https://github.com/dialect-map/dialect-map-schemas/blob/main/LICENSE
 
 [dialect-map-core]: https://github.com/dialect-map/dialect-map-core
 [docs-schemas]: docs/schemas.md
