@@ -15,7 +15,7 @@ VERSION = open("VERSION", "r").read().strip()
 
 # Package requirements
 INSTALLATION_REQS = [
-    "marshmallow==3.13.0",
+    "marshmallow==3.14.0",
 ]
 
 LINTING_REQS = [
