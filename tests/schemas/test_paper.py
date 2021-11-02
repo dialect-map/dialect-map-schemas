@@ -49,7 +49,7 @@ class TestPaperSchema:
         assert record.get("arxiv_rev") == 10
 
 
-class TestCPaperAuthorSchema:
+class TestPaperAuthorSchema:
     """Class to group all the PaperAuthor schema tests"""
 
     pass
