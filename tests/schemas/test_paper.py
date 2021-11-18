@@ -48,6 +48,17 @@ class TestPaperSchema:
         assert record.get("arxiv_id") == "paper-id-test"
         assert record.get("arxiv_rev") == 10
 
+    def test_load_invalid_arxiv_rev(self, test_data: dict):
+        """
+        Tests the correct validation of invalid ArXiv rev value
+        :param test_data: test Paper values
+        """
+
+        schema = PaperSchema()
+
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "arxiv_rev": -1})
+        assert pytest.raises(SchemaError, schema.load, {**test_data, "arxiv_rev": +0})
+
 
 class TestPaperAuthorSchema:
     """Class to group all the PaperAuthor schema tests"""

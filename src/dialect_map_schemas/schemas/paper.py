@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from marshmallow import fields
-from marshmallow import validates
 
 from .base import BaseStaticSchema
 from .base import BaseEvolvingSchema
+from .validators import arxiv_rev_range
+from .validators import paper_ref_count
 
 
 class PaperSchema(BaseEvolvingSchema):
     """ArXiv paper de/serializing schema"""
 
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True, strict=True)
+    arxiv_rev = fields.Integer(required=True, validate=arxiv_rev_range, strict=True)
     title = fields.String(required=True)
     doi_id = fields.String(required=False)
     url_pdf = fields.URL(required=False)
@@ -39,7 +40,7 @@ class PaperAuthorSchema(BaseStaticSchema):
 
     author_id = fields.String(required=False, dump_only=True)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True, strict=True)
+    arxiv_rev = fields.Integer(required=True, validate=arxiv_rev_range, strict=True)
     author_name = fields.String(required=True)
     created_at = fields.DateTime(required=True)
 
@@ -58,9 +59,9 @@ class PaperReferenceCountersSchema(BaseStaticSchema):
 
     count_id = fields.String(required=False, dump_only=True)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True, strict=True)
-    arxiv_ref_count = fields.Integer(required=True, strict=True)
-    total_ref_count = fields.Integer(required=True, strict=True)
+    arxiv_rev = fields.Integer(required=True, validate=arxiv_rev_range, strict=True)
+    arxiv_ref_count = fields.Integer(required=True, validate=paper_ref_count, strict=True)
+    total_ref_count = fields.Integer(required=True, validate=paper_ref_count, strict=True)
     created_at = fields.DateTime(required=True)
 
     @property
@@ -71,21 +72,3 @@ class PaperReferenceCountersSchema(BaseStaticSchema):
         """
 
         return str(self.count_id.name)
-
-    @validates("arxiv_ref_count")
-    def validate_arxiv_ref_count(self, count: int):
-        """
-        Validates paper ArXiv internal references
-        :param count: paper ArXiv internal references
-        """
-
-        assert count >= 0, f"Invalid references count: {count}"
-
-    @validates("total_ref_count")
-    def validate_total_ref_count(self, count: int):
-        """
-        Validates paper total references
-        :param count: paper total references
-        """
-
-        assert count >= 0, f"Invalid references count: {count}"

@@ -1,24 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import re
-
 from marshmallow import fields
-from marshmallow import validates
 
 from .base import BaseArchivalSchema
-
-
-JARGON_TERM_REGEX = re.compile("^[a-z]+([ \\-][a-z]+)*$")
-JARGON_ID_REGEX = re.compile("^group-\\d+-jargon-\\d+$")
-GROUP_ID_REGEX = re.compile("^group-\\d+$")
+from .validators import group_id_regex
+from .validators import jargon_id_regex
+from .validators import jargon_term_regex
 
 
 class JargonSchema(BaseArchivalSchema):
     """Jargon de/serializing schema"""
 
-    group_id = fields.String(required=False)
-    jargon_id = fields.String(required=True)
-    jargon_term = fields.String(required=True)
+    group_id = fields.String(required=False, validate=group_id_regex)
+    jargon_id = fields.String(required=True, validate=jargon_id_regex)
+    jargon_term = fields.String(required=True, validate=jargon_term_regex)
     jargon_regex = fields.String(required=True)
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True, metadata={"CTX_GET": "group_dt"})
@@ -33,38 +28,11 @@ class JargonSchema(BaseArchivalSchema):
 
         return str(self.jargon_id.name)
 
-    @validates("group_id")
-    def validate_group_id(self, id: str):
-        """
-        Validates the jargon group ID format
-        :param id: jargon group ID
-        """
-
-        assert re.match(GROUP_ID_REGEX, id), f"Invalid ID: {id}"
-
-    @validates("jargon_id")
-    def validate_jargon_id(self, id: str):
-        """
-        Validates the jargon ID format
-        :param id: jargon ID
-        """
-
-        assert re.match(JARGON_ID_REGEX, id), f"Invalid ID: {id}"
-
-    @validates("jargon_term")
-    def validate_jargon_term(self, term: str):
-        """
-        Validates the jargon term format
-        :param term: jargon term
-        """
-
-        assert re.match(JARGON_TERM_REGEX, term), f"Invalid term: {term}"
-
 
 class JargonGroupSchema(BaseArchivalSchema):
     """Jargon group de/serializing schema"""
 
-    group_id = fields.String(required=True, metadata={"ALT": "id"})
+    group_id = fields.String(required=True, validate=group_id_regex, metadata={"ALT": "id"})
     description = fields.String(required=True)
     archived = fields.Boolean(required=True)
     created_at = fields.DateTime(required=True, metadata={"CTX_SET": "group_dt"})
@@ -85,12 +53,3 @@ class JargonGroupSchema(BaseArchivalSchema):
         """
 
         return str(self.group_id.name)
-
-    @validates("group_id")
-    def validate_group_id(self, id: str):
-        """
-        Validates the jargon group ID format
-        :param id: jargon group ID
-        """
-
-        assert re.match(GROUP_ID_REGEX, id), f"Invalid ID: {id}"
