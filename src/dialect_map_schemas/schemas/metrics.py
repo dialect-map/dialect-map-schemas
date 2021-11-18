@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from marshmallow import fields
-from marshmallow import validates
 
 from .base import BaseStaticSchema
+from .validators import arxiv_rev_range
+from .validators import jargon_abs_freq
+from .validators import jargon_rel_freq
 
 
 class JargonCategoryMetricsSchema(BaseStaticSchema):
@@ -12,8 +14,8 @@ class JargonCategoryMetricsSchema(BaseStaticSchema):
     metric_id = fields.String(required=False, dump_only=True)
     jargon_id = fields.String(required=True)
     category_id = fields.String(required=True)
-    abs_freq = fields.Integer(required=True, strict=True)
-    rel_freq = fields.Float(required=True)
+    abs_freq = fields.Integer(required=True, validate=jargon_abs_freq, strict=True)
+    rel_freq = fields.Float(required=True, validate=jargon_rel_freq)
     created_at = fields.DateTime(required=True)
 
     @property
@@ -24,25 +26,6 @@ class JargonCategoryMetricsSchema(BaseStaticSchema):
         """
 
         return str(self.metric_id.name)
-
-    @validates("abs_freq")
-    def validate_abs_freq(self, freq: int):
-        """
-        Validates jargon absolute frequency within a category
-        :param freq: jargon term occurrences within a category
-        """
-
-        assert freq >= 0, f"Invalid absolute frequency: {freq}"
-
-    @validates("rel_freq")
-    def validate_rel_freq(self, freq: float):
-        """
-        Validates jargon relative frequency within a category
-        :param freq: jargon term relative frequency within a category
-        """
-
-        assert freq >= 0, f"Invalid relative frequency: {freq}"
-        assert freq <= 1, f"Invalid relative frequency: {freq}"
 
 
 class JargonPaperMetricsSchema(BaseStaticSchema):
@@ -51,9 +34,9 @@ class JargonPaperMetricsSchema(BaseStaticSchema):
     metric_id = fields.String(required=False, dump_only=True)
     jargon_id = fields.String(required=True)
     arxiv_id = fields.String(required=True)
-    arxiv_rev = fields.Integer(required=True, strict=True)
-    abs_freq = fields.Integer(required=True, strict=True)
-    rel_freq = fields.Float(required=True)
+    arxiv_rev = fields.Integer(required=True, validate=arxiv_rev_range, strict=True)
+    abs_freq = fields.Integer(required=True, validate=jargon_abs_freq, strict=True)
+    rel_freq = fields.Float(required=True, validate=jargon_rel_freq)
     created_at = fields.DateTime(required=True)
 
     @property
@@ -64,22 +47,3 @@ class JargonPaperMetricsSchema(BaseStaticSchema):
         """
 
         return str(self.metric_id.name)
-
-    @validates("abs_freq")
-    def validate_abs_freq(self, freq: int):
-        """
-        Validates jargon absolute frequency within a paper
-        :param freq: jargon term occurrences within a paper
-        """
-
-        assert freq >= 0, f"Invalid absolute frequency: {freq}"
-
-    @validates("rel_freq")
-    def validate_rel_freq(self, freq: float):
-        """
-        Validates jargon relative frequency within a paper
-        :param freq: jargon term relative frequency within a paper
-        """
-
-        assert freq >= 0, f"Invalid relative frequency: {freq}"
-        assert freq <= 1, f"Invalid relative frequency: {freq}"
