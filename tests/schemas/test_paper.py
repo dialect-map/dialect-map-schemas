@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from copy import deepcopy
 from datetime import date
 from datetime import datetime
+
+import pytest
 
 from src.dialect_map_schemas import PaperSchema
 from src.dialect_map_schemas import PaperReferenceCountersSchema

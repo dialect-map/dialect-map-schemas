@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from copy import deepcopy
 from datetime import datetime
+
+import pytest
+
 from marshmallow import fields
 
 from src.dialect_map_schemas import BaseSchema

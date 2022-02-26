@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
 from copy import deepcopy
 from datetime import datetime
+
+import pytest
 
 from src.dialect_map_schemas import JargonCategoryMetricsSchema
 from src.dialect_map_schemas import JargonPaperMetricsSchema
