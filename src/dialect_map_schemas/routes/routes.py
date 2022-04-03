@@ -55,6 +55,11 @@ DM_PAPER_METRICS_ROUTE = APIRoute(
     api_path="/paper-metrics",
     schema=JargonPaperMetricsSchema,
 )
+DM_PAPER_METADATA_ROUTE = APIRoute(
+    api_name="dialect-map",
+    api_path="/paper-metadata",
+    schema=PaperMetadataSchema,
+)
 
 
 # -------- Dialect Map: Reference routes -------- #
