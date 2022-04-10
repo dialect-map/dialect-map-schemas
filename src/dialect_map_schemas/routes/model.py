@@ -7,10 +7,16 @@ from typing import Union
 from ..schemas import BaseStaticSchema
 from ..schemas import BaseArchivalSchema
 from ..schemas import BaseEvolvingSchema
+from ..schemas import BaseCombinedSchema
 
 
 # Generic base schema type
-Schema = Union[BaseStaticSchema, BaseArchivalSchema, BaseEvolvingSchema]
+Schema = Union[
+    BaseCombinedSchema,
+    BaseArchivalSchema,
+    BaseEvolvingSchema,
+    BaseStaticSchema,
+]
 
 
 @dataclass
@@ -20,11 +26,9 @@ class APIRoute:
 
     :attr api_name: informative name of the API
     :attr api_path: specific path within the API base URL
-    :attr model_name: specific data model name associated to the route
-    :attr model_name: specific data model schema associated to the route
+    :attr schema: specific data model schema associated to the route
     """
 
     api_name: str
     api_path: str
-    model_name: str
-    model_schema: Type[Schema]
+    schema: Type[Schema]
