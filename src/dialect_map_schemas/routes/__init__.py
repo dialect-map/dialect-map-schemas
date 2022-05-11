@@ -12,6 +12,7 @@ from .routes import DM_JARGON_GROUP_ROUTE
 from .routes import DM_PAPER_ROUTE
 from .routes import DM_PAPER_AUTHOR_ROUTE
 from .routes import DM_PAPER_METRICS_ROUTE
+from .routes import DM_PAPER_METADATA_ROUTE
 
 from .routes import DM_REFERENCE_ROUTE
 from .routes import DM_REFERENCE_COUNTERS_ROUTE
