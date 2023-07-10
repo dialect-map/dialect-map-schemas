@@ -32,7 +32,7 @@ test = [
 all = [
     "dialect-map-schemas[lint]",
     "dialect-map-schemas[test]",
-    "pre-commit==3.3.2",
+    "pre-commit==3.3.3",
 ]
 
 [project.urls]
