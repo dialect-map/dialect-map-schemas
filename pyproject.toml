@@ -16,7 +16,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-    "marshmallow==3.19.0",
+    "marshmallow==3.20.1",
 ]
 
 [project.optional-dependencies]
