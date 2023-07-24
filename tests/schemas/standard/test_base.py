@@ -8,9 +8,9 @@ import pytest
 from marshmallow import fields
 
 from src.dialect_map_schemas import BaseSchema
-from src.dialect_map_schemas import BaseStaticSchema
-from src.dialect_map_schemas import BaseArchivalSchema
-from src.dialect_map_schemas import BaseEvolvingSchema
+from src.dialect_map_schemas import StaticSchema
+from src.dialect_map_schemas import ArchivalSchema
+from src.dialect_map_schemas import EvolvingSchema
 from src.dialect_map_schemas import SchemaError
 
 
@@ -88,29 +88,29 @@ class TestBaseSchema:
         assert schema.context.get("ctx_key") == "value-ctx"
 
 
-class TestBaseStaticSchema:
+class TestStaticSchema:
     """
-    Class to group all the BaseStatic schema tests
+    Class to group all the Static schema tests
 
-    Given that the base schemas define no fields, the @validates_schema
+    Given that the mixin schemas define no fields, the @validates_schema
     decorated method needs to be called directly, instead of relying on the standard validate()
     """
 
     pass
 
 
-class TestBaseArchivalSchema:
+class TestArchivalSchema:
     """
-    Class to group all the BaseArchival schema tests
+    Class to group all the Archival schema tests
 
-    Given that the base schemas define no fields, the @validates_schema
+    Given that the mixin schemas define no fields, the @validates_schema
     decorated method needs to be called directly, instead of relying on the standard validate()
     """
 
     def test_valid_archived_at(self):
         """Tests the correct validation of the valid datetime fields"""
 
-        schema = BaseArchivalSchema()
+        schema = ArchivalSchema()
         dt_now = datetime.utcnow()
 
         record = {
@@ -123,7 +123,7 @@ class TestBaseArchivalSchema:
     def test_invalid_archived_at(self):
         """Tests the correct validation of the invalid datetime fields"""
 
-        schema = BaseArchivalSchema()
+        schema = ArchivalSchema()
         tm_now = datetime.utcnow().timestamp()
 
         record = {
@@ -134,18 +134,18 @@ class TestBaseArchivalSchema:
         assert pytest.raises(SchemaError, schema.validate_archival_date, record)
 
 
-class TestBaseEvolvingSchema:
+class TestEvolvingSchema:
     """
-    Class to group all the BaseEvolving schema tests
+    Class to group all the Evolving schema tests
 
-    Given that the base schemas define no fields, the @validates_schema
+    Given that the mixin schemas define no fields, the @validates_schema
     decorated method needs to be called directly, instead of relying on the standard validate()
     """
 
     def test_valid_updated_at(self):
         """Tests the correct validation of the valid datetime fields"""
 
-        schema = BaseEvolvingSchema()
+        schema = EvolvingSchema()
         dt_now = datetime.utcnow()
 
         record = {
@@ -158,7 +158,7 @@ class TestBaseEvolvingSchema:
     def test_invalid_updated_at(self):
         """Tests the correct validation of the invalid datetime fields"""
 
-        schema = BaseEvolvingSchema()
+        schema = EvolvingSchema()
         tm_now = datetime.utcnow().timestamp()
 
         record = {

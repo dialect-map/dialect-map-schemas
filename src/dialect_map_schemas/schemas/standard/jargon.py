@@ -2,13 +2,14 @@
 
 from marshmallow import fields
 
-from .base import BaseArchivalSchema
+from .base import BaseSchema
+from .base import ArchivalSchema
 from .validators import group_id_regex
 from .validators import jargon_id_regex
 from .validators import jargon_term_regex
 
 
-class JargonSchema(BaseArchivalSchema):
+class JargonSchema(BaseSchema, ArchivalSchema):
     """Jargon de/serializing schema"""
 
     group_id = fields.String(required=False, validate=group_id_regex)
@@ -29,7 +30,7 @@ class JargonSchema(BaseArchivalSchema):
         return str(self.jargon_id.name)
 
 
-class JargonGroupSchema(BaseArchivalSchema):
+class JargonGroupSchema(BaseSchema, ArchivalSchema):
     """Jargon group de/serializing schema"""
 
     group_id = fields.String(required=True, validate=group_id_regex, metadata={"ALT": "id"})

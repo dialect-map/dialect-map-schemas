@@ -4,18 +4,18 @@ from dataclasses import dataclass
 from typing import Type
 from typing import Union
 
-from ..schemas import BaseStaticSchema
-from ..schemas import BaseArchivalSchema
-from ..schemas import BaseEvolvingSchema
+from ..schemas import StaticSchema
+from ..schemas import ArchivalSchema
+from ..schemas import EvolvingSchema
 from ..schemas import BaseCombinedSchema
 
 
 # Generic base schema type
 Schema = Union[
     BaseCombinedSchema,
-    BaseArchivalSchema,
-    BaseEvolvingSchema,
-    BaseStaticSchema,
+    ArchivalSchema,
+    EvolvingSchema,
+    StaticSchema,
 ]
 
 

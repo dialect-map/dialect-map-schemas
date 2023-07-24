@@ -116,8 +116,8 @@ class BaseSchema(Schema):
                 self.context[key] = val
 
 
-class BaseStaticSchema(BaseSchema):
-    """Base class defining validations for the static models"""
+class StaticSchema:
+    """Mixin class defining validations for the static models"""
 
     @property
     @abstractmethod
@@ -139,8 +139,8 @@ class BaseStaticSchema(BaseSchema):
         return self.__class__.__name__
 
 
-class BaseArchivalSchema(BaseSchema):
-    """Base class defining validations for the archival models"""
+class ArchivalSchema:
+    """Mixin class defining validations for the archival models"""
 
     @property
     @abstractmethod
@@ -181,8 +181,8 @@ class BaseArchivalSchema(BaseSchema):
             raise ValidationError("The archival date cannot be prior the creation date")
 
 
-class BaseEvolvingSchema(BaseSchema):
-    """Base class defining validations for the evolving models"""
+class EvolvingSchema:
+    """Mixin class defining validations for the evolving models"""
 
     @property
     @abstractmethod

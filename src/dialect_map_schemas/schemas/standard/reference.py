@@ -2,11 +2,12 @@
 
 from marshmallow import fields
 
-from .base import BaseStaticSchema
+from .base import BaseSchema
+from .base import StaticSchema
 from .validators import arxiv_rev_range
 
 
-class PaperReferenceSchema(BaseStaticSchema):
+class PaperReferenceSchema(BaseSchema, StaticSchema):
     """ArXiv paper reference de/serializing schema"""
 
     reference_id = fields.String(required=False, dump_only=True)

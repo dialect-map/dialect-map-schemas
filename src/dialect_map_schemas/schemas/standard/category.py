@@ -2,10 +2,11 @@
 
 from marshmallow import fields
 
-from .base import BaseArchivalSchema
+from .base import BaseSchema
+from .base import ArchivalSchema
 
 
-class CategorySchema(BaseArchivalSchema):
+class CategorySchema(BaseSchema, ArchivalSchema):
     """Category de/serializing schema"""
 
     category_id = fields.String(required=True, metadata={"ALT": "id"})

@@ -2,13 +2,14 @@
 
 from marshmallow import fields
 
-from .base import BaseStaticSchema
-from .base import BaseEvolvingSchema
+from .base import BaseSchema
+from .base import StaticSchema
+from .base import EvolvingSchema
 from .validators import arxiv_rev_range
 from .validators import paper_ref_count
 
 
-class PaperSchema(BaseEvolvingSchema):
+class PaperSchema(BaseSchema, EvolvingSchema):
     """ArXiv paper de/serializing schema"""
 
     arxiv_id = fields.String(required=True)
@@ -35,7 +36,7 @@ class PaperSchema(BaseEvolvingSchema):
         return str(self.arxiv_id.name)
 
 
-class PaperAuthorSchema(BaseStaticSchema):
+class PaperAuthorSchema(BaseSchema, StaticSchema):
     """ArXiv paper author de/serializing schema"""
 
     author_id = fields.String(required=False, dump_only=True)
@@ -54,7 +55,7 @@ class PaperAuthorSchema(BaseStaticSchema):
         return str(self.author_id.name)
 
 
-class PaperReferenceCountersSchema(BaseStaticSchema):
+class PaperReferenceCountersSchema(BaseSchema, StaticSchema):
     """ArXiv paper reference counters de/serializing schema"""
 
     count_id = fields.String(required=False, dump_only=True)
