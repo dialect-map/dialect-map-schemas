@@ -2,13 +2,14 @@
 
 from marshmallow import fields
 
-from .base import BaseStaticSchema
+from .base import BaseSchema
+from .base import StaticSchema
 from .validators import arxiv_rev_range
 from .validators import jargon_abs_freq
 from .validators import jargon_rel_freq
 
 
-class JargonCategoryMetricsSchema(BaseStaticSchema):
+class JargonCategoryMetricsSchema(BaseSchema, StaticSchema):
     """Jargon - category NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False, dump_only=True)
@@ -28,7 +29,7 @@ class JargonCategoryMetricsSchema(BaseStaticSchema):
         return str(self.metric_id.name)
 
 
-class JargonPaperMetricsSchema(BaseStaticSchema):
+class JargonPaperMetricsSchema(BaseSchema, StaticSchema):
     """Jargon - paper NLP metrics de/serializing schema"""
 
     metric_id = fields.String(required=False, dump_only=True)
