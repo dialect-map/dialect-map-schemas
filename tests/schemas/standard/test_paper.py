@@ -3,6 +3,7 @@
 from copy import deepcopy
 from datetime import date
 from datetime import datetime
+from datetime import timezone
 
 import pytest
 
@@ -26,8 +27,8 @@ class TestPaperSchema:
             "arxiv_rev": 1,
             "title": "example",
             "submission_date": date.today().isoformat(),
-            "created_at": datetime.utcnow().isoformat(),
-            "updated_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
+            "updated_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_valid_values(self, test_data: dict):
@@ -81,7 +82,7 @@ class TestPaperReferenceCountersSchema:
             "arxiv_rev": 1,
             "arxiv_ref_count": 10,
             "total_ref_count": 20,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_valid_values(self, test_data: dict):

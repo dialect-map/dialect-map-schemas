@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 from datetime import datetime
+from datetime import timezone
 
 import pytest
 
@@ -26,7 +27,7 @@ class TestJargonSchema:
             "jargon_term": "jargon-term",
             "jargon_regex": "jargon[ -]term",
             "archived": True,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_valid_values(self, test_data: dict):
@@ -105,7 +106,7 @@ class TestJargonGroupSchema:
             "description": "example text",
             "archived": True,
             "jargons": [],
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_nested_schemas(self, test_data: dict):
@@ -115,7 +116,7 @@ class TestJargonGroupSchema:
         """
 
         schema = JargonGroupSchema()
-        dt_now = datetime.utcnow()
+        dt_now = datetime.now(timezone.utc)
 
         group_data = deepcopy(test_data)
         group_data["created_at"] = dt_now.isoformat()

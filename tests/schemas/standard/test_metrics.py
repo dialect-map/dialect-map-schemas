@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 from datetime import datetime
+from datetime import timezone
 
 import pytest
 
@@ -25,7 +26,7 @@ class TestJargonCategoryMetricsSchema:
             "category_id": "category-id",
             "abs_freq": 5,
             "rel_freq": 0.10,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_valid_values(self, test_data: dict):
@@ -81,7 +82,7 @@ class TestJargonPaperMetricsSchema:
             "arxiv_rev": 1,
             "abs_freq": 5,
             "rel_freq": 0.10,
-            "created_at": datetime.utcnow().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
         }
 
     def test_load_valid_values(self, test_data: dict):

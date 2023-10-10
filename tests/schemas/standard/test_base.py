@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 from datetime import datetime
+from datetime import timezone
 
 import pytest
 
@@ -111,7 +112,7 @@ class TestArchivalSchema:
         """Tests the correct validation of the valid datetime fields"""
 
         schema = ArchivalSchema()
-        dt_now = datetime.utcnow()
+        dt_now = datetime.now(timezone.utc)
 
         record = {
             "created_at": dt_now,
@@ -124,7 +125,7 @@ class TestArchivalSchema:
         """Tests the correct validation of the invalid datetime fields"""
 
         schema = ArchivalSchema()
-        tm_now = datetime.utcnow().timestamp()
+        tm_now = datetime.now(timezone.utc).timestamp()
 
         record = {
             "created_at": datetime.fromtimestamp(tm_now + 1),
@@ -146,7 +147,7 @@ class TestEvolvingSchema:
         """Tests the correct validation of the valid datetime fields"""
 
         schema = EvolvingSchema()
-        dt_now = datetime.utcnow()
+        dt_now = datetime.now(timezone.utc)
 
         record = {
             "created_at": dt_now,
@@ -159,7 +160,7 @@ class TestEvolvingSchema:
         """Tests the correct validation of the invalid datetime fields"""
 
         schema = EvolvingSchema()
-        tm_now = datetime.utcnow().timestamp()
+        tm_now = datetime.now(timezone.utc).timestamp()
 
         record = {
             "created_at": datetime.fromtimestamp(tm_now + 1),

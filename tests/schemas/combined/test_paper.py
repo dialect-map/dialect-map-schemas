@@ -3,6 +3,7 @@
 from copy import deepcopy
 from datetime import date
 from datetime import datetime
+from datetime import timezone
 
 import pytest
 
@@ -22,7 +23,7 @@ class TestPaperMetadataSchema:
 
         paper_id = "paper-id"
         paper_rev = 1
-        time_now = datetime.utcnow().isoformat()
+        time_now = datetime.now(timezone.utc).isoformat()
 
         return {
             "paper": {
@@ -85,6 +86,6 @@ class TestPaperMetadataSchema:
         schema = PaperMetadataSchema()
 
         paper_metadata = deepcopy(test_data)
-        paper_metadata["paper"]["created_at"] = datetime.utcnow().isoformat()
+        paper_metadata["paper"]["created_at"] = datetime.now(timezone.utc).isoformat()
 
         assert pytest.raises(SchemaError, schema.load, paper_metadata)
